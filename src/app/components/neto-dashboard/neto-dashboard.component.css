@@ -1,0 +1,22 @@
+.item-row {
+    display: block;
+    border-bottom: 1px solid #000000;
+    text-align: center justify;
+}
+
+.item-row > .col-md-3 {
+    display: -webkit-inline-box;
+    vertical-align: middle;
+}
+.item-row > .col-md-2 {
+    display: -webkit-inline-box;
+    vertical-align: middle;
+}
+
+.fullfil-ali {
+    margin-bottom: 10px;
+}
+
+.confirm-fullfilment {
+    margin-left: -10px;
+}

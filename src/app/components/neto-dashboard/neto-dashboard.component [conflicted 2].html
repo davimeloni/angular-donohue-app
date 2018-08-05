@@ -1,0 +1,65 @@
+<div class="container">
+  <p>
+    Neto Table
+  </p>
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Items</th>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Ship Address</th>
+        <th scope="col">Ship Mobile</th>
+        <th scope="col">Date Placed</th>
+        <th scope="col">Order Total</th>
+        <th scope="col">Order Status</th>
+        <th scope="col">Dispatch Order</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let order of netoOrders; index as i;">
+      <tr >
+        <th scope="row">
+          <a class="btn btn-link" (click)="toggle[i] = !toggle[i]">
+            <span class="fa fa-plus" *ngIf="!toggle[i]"></span>
+            <span class="fa fa-minus" *ngIf="toggle[i]"></span>
+          </a>
+          ({{order.OrderLine.length}}) - {{i}}
+        </th>
+        <td>{{order.OrderID}}</td>
+        <td>{{order.BillFirstName}} {{order.BillLastName}}</td>
+        <td>{{order.ShipStreetLine1}} {{order.ShipStreetLine2}}, {{order.ShipCity}} - {{order.ShipState}}</td>
+        <td>{{order.ShipPhone}}</td>
+        <td>{{order.DatePlaced | date: short}}</td>
+        <td>{{order.GrandTotal | currency}}</td>
+        <td>{{order.OrderStatus}}</td>
+        <td><button (click)="dispatchOrder(order)" class="btn btn-primary" >Dispatch</button></td>
+      </tr>
+      <tr *ngIf="toggle[i]" style="background: steelblue; color: white;">
+          <td colspan="12">
+            <div class="row item-row" *ngFor="let item of order.OrderLine">
+              <div class="col-md-3">
+                <span>SKU: {{item.SKU}}</span><br/>
+                <span>{{item.ProductName}}</span>
+              </div>
+              <div class="col-md-2">
+                <span>B: {{item.CostPrice | currency }} S: {{item.UnitPrice | currency }}</span><br/>
+                <span>Margin: {{item.UnitPrice - item.CostPrice | currency }}</span>
+              </div>
+              <div class="col-md-2">
+                <span>Shipping Method</span><br />
+                <span>Shipping Price</span>
+              </div>
+              <div class="col-md-3">
+                  <button (click)="fullfilWithAli(order, item)" class="btn btn-danger fullfil-ali" href="#" style="color: white;">Fullfil with Aliexpress</button>
+                  <input type="text" placeholder="Tracking Number" />
+              </div>
+              <div class="col-md-2">
+                  <button class="btn btn-success confirm-fullfilment">Confirm Fullfilment</button>
+              </div>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+  </div>
